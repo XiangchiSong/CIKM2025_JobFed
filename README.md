@@ -1,4 +1,4 @@
-# [IJCAI 2025] JobFed: Joint Optimization for Balancing Generalization and Personalization of Hierarchical Federated Learning in Large-scale IoT Environments
+# [CIKM 2025] JobFed: Joint Optimization for Balancing Generalization and Personalization of Hierarchical Federated Learning in Large-scale IoT Environments
 
 ## System Code
 It is not available yet. The available code will be open source after the paper is published.
