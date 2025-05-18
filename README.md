@@ -20,8 +20,8 @@ The client learning rate (`$client\_lr$`) and server learning rate (`$server\_lr
 
 - In `pFedMe`, the server updates the global model with the designed parameter ($\beta$) set to **1.0**.
 - In `Per-FedAvg`, $\beta$ varies between **0.1 / 0.2** depending on the experiments.
-- For `SCAFFOLD` and `FedProx`, the weight decay (`$weight\_decay$`) is set to **1e-4**.
-- The proximal regularization parameter (`$FedProx\_mu$`) in `FedProx` is also set to **1e-4**.
+- For `SCAFFOLD` and `FedProx`, the weight decay (`$weight_decay$`) is set to **1e-4**.
+- The proximal regularization parameter (`$FedProx_mu$`) in `FedProx` is also set to **1e-4**.
 
 The $\alpha$ update learning rate ($\eta$) used in **our approach** is set to **0.1** by default. The predefined balancing ratio ($\gamma$) defaults to **0.5**, and the balancing ratio in the strategy (`$optBeta$`) is also set to **0.5** by default.
 
