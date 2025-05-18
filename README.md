@@ -30,13 +30,14 @@ For experiments where the results do not show significant differences, such as t
 
 ### Sequence Diagram of Architecture Workflow
 
-<table style="width: 100%;">
-<tr>
-  <td style="width: 50%; vertical-align: top;">
-    <img src="https://github.com/XiangchiSong/CIKM2025_JobFed/blob/main/Architecture%20Workflow.png?raw=true" alt="Architecture Workflow" style="width: 100%; border: 1px solid #ccc;">
-  </td>
-  <td style="width: 50%; vertical-align: top; padding-left: 20px; font-size: 14px; line-height: 1.6;">
-    
+<table>
+  <tr>
+    <td align="center" valign="middle" width="40%">
+      <img src="https://github.com/XiangchiSong/CIKM2025_JobFed/blob/main/Architecture%20Workflow.png?raw=true" alt="Sequence Workflow" width="600">
+    </td>
+    <td valign="middle" width="50%">
+      <div style="font-size:70%;">
+        
 The process begins with the edge devices initiating communication with the fog layer by sending identification information (`register()`). In response, the fog layer provides the edge devices with initial cluster configurations (`sendEdgeClusterConfig()`). This initial clustering is done randomly, and the edge devices are assigned to the cluster controlled by the fog nodes. Concurrently, the cloud initializes the global model (`initGlobalModel()`) and distributes the initial model to the fog layer, laying the foundation for subsequent local training of client models on the edge devices and aggregation within the fog and cloud layers. The processes of initial clustering for edge devices and the model initialization in the cloud server are performed in parallel. Upon receiving the initial global model from the cloud server (`sendinitGlobalModel()`), the fog layers distribute the global model to all of the edge devices for which they are responsible (`sendGlobalModel()`). The objective here is to train the global model on local data available at the edge device. This training process occurs in a loop, iteratively refining the global model and the local models until both reach a certain level of convergence and performance.
 
 Once the distribution from the fog layer to the edge devices is complete, the edge devices begin local training (`beginLocalTraining()`), updating the model based on local data. After a round of training is completed, the private information is separated from the trained model (`separateBNStatistics()`) to create a personalized and non-personalized model. The private information is represented by separable parameters stored in BN Statistics. Both models are then concurrently sent to the fog layer (`sendBNStatistics()` and `sendNPModel()`) for further aggregation. The aggregation at the fog layers (`aggregateLocalModels()`) enhances the models' generalization across the data from various edge devices while maintaining privacy, and then updates the BN statistics (`updateBNStatistics()`). Then, based on the designed mechanism and the feedback from the cloud and the edge in the previous round, the joint optimization strategy of this round is adjusted (`updateJStrategy (via R Condition)`).
@@ -45,7 +46,6 @@ The updates to statistics and strategy are transmitted to the cloud server (`sen
 
 The cloud then sends the global aggregated model back to the fog layer (`sendGlobalModel()`), which, after separation (`separateGlobalModel()`), distributes the global model without personalized information to the edge devices represented by all clients (`sendGlobalNPModel()`). This model contains the public information of all clients in the system on their respective devices and has been globally adapted to make it more suitable for subsequent local personalized adjustments. After receiving this model, the client combines it with local private information and performs the personalization process (`combinePersonalizedInfo()`). During the personalization process, the BN layer adjusts the local model of each client to adapt the global model to local data distributions. After local adaptation is completed, they are tested using a local distribution dataset (`testLocalModels()`), and the test feedback is sent back to the fog for the next round of strategy updates (`sendLocalFeedback()`). At the same time, the local personalized models will participate in subsequent training as updated local models.
 
-  </td>
 </tr>
 </table>
 
