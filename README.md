@@ -30,15 +30,12 @@ For experiments where the results do not show significant differences, such as t
 
 ### Sequence Diagram of Architecture Workflow
 
-<div style="display: flex; flex-direction: row; gap: 30px; align-items: flex-start;">
-
-<!-- 左侧图像 -->
-<div style="flex: 1;">
-  <img src="https://github.com/XiangchiSong/CIKM2025_JobFed/blob/main/Architecture%20Workflow.png" alt="Architecuture Workflow" style="width: 30%; min-width: 200px; max-width: 300px; height: auto; border: 1px solid #ccc;">
-</div>
-
-<!-- 右侧正文 -->
-<div style="flex: 2; font-size: 14px; line-height: 1.6;">
+<table>
+<tr>
+  <td style="width: 30%; vertical-align: top;">
+    <img src="https://github.com/XiangchiSong/CIKM2025_JobFed/blob/main/Architecture%20Workflow.png" alt="Architecuture Workflow" style="width:100%; max-width:240px; border:1px solid #ccc;">
+  </td>
+  <td style="width: 70%; vertical-align: top; padding-left: 20px;">
 
 The process begins with the edge devices initiating communication with the fog layer by sending identification information (`register()`). In response, the fog layer provides the edge devices with initial cluster configurations (`sendEdgeClusterConfig()`). This initial clustering is done randomly, and the edge devices are assigned to the cluster controlled by the fog nodes. Concurrently, the cloud initializes the global model (`initGlobalModel()`) and distributes the initial model to the fog layer, laying the foundation for subsequent local training of client models on the edge devices and aggregation within the fog and cloud layers. The processes of initial clustering for edge devices and the model initialization in the cloud server are performed in parallel. Upon receiving the initial global model from the cloud server (`sendinitGlobalModel()`), the fog layers distribute the global model to all of the edge devices for which they are responsible (`sendGlobalModel()`). The objective here is to train the global model on local data available at the edge device. This training process occurs in a loop, iteratively refining the global model and the local models until both reach a certain level of convergence and performance.
 
@@ -48,8 +45,10 @@ The updates to statistics and strategy are transmitted to the cloud server (`sen
 
 The cloud then sends the global aggregated model back to the fog layer (`sendGlobalModel()`), which, after separation (`separateGlobalModel()`), distributes the global model without personalized information to the edge devices represented by all clients (`sendGlobalNPModel()`). This model contains the public information of all clients in the system on their respective devices and has been globally adapted to make it more suitable for subsequent local personalized adjustments. After receiving this model, the client combines it with local private information and performs the personalization process (`combinePersonalizedInfo()`). During the personalization process, the BN layer adjusts the local model of each client to adapt the global model to local data distributions. After local adaptation is completed, they are tested using a local distribution dataset (`testLocalModels()`), and the test feedback is sent back to the fog for the next round of strategy updates (`sendLocalFeedback()`). At the same time, the local personalized models will participate in subsequent training as updated local models.
 
-</div>
-</div>
+  </td>
+</tr>
+</table>
+
 
 
 
