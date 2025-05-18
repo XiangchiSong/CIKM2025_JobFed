@@ -33,7 +33,7 @@ For experiments where the results do not show significant differences, such as t
 <table style="width: 100%;">
 <tr>
   <td style="width: 50%; vertical-align: top;">
-    <img src="[https://raw.githubusercontent.com/XiangchiSong/CIKM2025_JobFed/main/Architecture%20Workflow.png](https://github.com/XiangchiSong/CIKM2025_JobFed/blob/main/Architecture%20Workflow.png?raw=true)" alt="Architecture Workflow" style="width: 100%; border: 1px solid #ccc;">
+    <img src="https://github.com/XiangchiSong/CIKM2025_JobFed/blob/main/Architecture%20Workflow.png?raw=true" alt="Architecture Workflow" style="width: 100%; border: 1px solid #ccc;">
   </td>
   <td style="width: 50%; vertical-align: top; padding-left: 20px; font-size: 14px; line-height: 1.6;">
     
