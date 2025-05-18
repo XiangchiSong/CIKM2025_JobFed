@@ -33,7 +33,7 @@ For experiments where the results do not show significant differences, such as t
 <table>
   <tr>
     <td align="center" valign="middle" width="40%">
-      <img src="https://github.com/XiangchiSong/CIKM2025_JobFed/blob/main/Architecture%20Workflow.png?raw=true" alt="Sequence Workflow" width="600">
+      <img src="https://github.com/XiangchiSong/CIKM2025_JobFed/blob/main/Architecture%20Workflow.png?raw=true" alt="Sequence Diagram of Architecture Workflow" width="600">
     </td>
     <td valign="middle" width="50%">
       <div style="font-size:70%;">
