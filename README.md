@@ -29,16 +29,16 @@ For experiments where the results do not show significant differences, such as t
 
 
 ### Sequence Diagram of Architecture Workflow
-<table style="width: 100%; table-layout: fixed;">
+
+<table>
 <tr>
-  <!-- 左侧图像 50% -->
-  <td style="width: 50%; vertical-align: top;">
-    <img src="https://github.com/XiangchiSong/CIKM2025_JobFed/blob/main/Architecture%20Workflow.png" alt="Architecture Workflow" style="width: 100%; max-width: 100%; border: 1px solid #ccc;">
+  <!-- 左侧图像，固定宽度 -->
+  <td style="width: 300px; vertical-align: top;">
+    <img src="https://github.com/XiangchiSong/CIKM2025_JobFed/blob/main/Architecture%20Workflow.png" alt="Architecture Workflow" style="width: 100%; border: 1px solid #ccc;">
   </td>
 
-  <!-- 右侧文字 50% -->
-  <td style="width: 50%; vertical-align: top; padding-left: 20px; font-size: 14px; line-height: 1.6;">
-
+  <!-- 右侧文字，占据剩余宽度 -->
+  <td style="vertical-align: top; padding-left: 20px; font-size: 14px; line-height: 1.6;">
 The process begins with the edge devices initiating communication with the fog layer by sending identification information (`register()`). In response, the fog layer provides the edge devices with initial cluster configurations (`sendEdgeClusterConfig()`). This initial clustering is done randomly, and the edge devices are assigned to the cluster controlled by the fog nodes. Concurrently, the cloud initializes the global model (`initGlobalModel()`) and distributes the initial model to the fog layer, laying the foundation for subsequent local training of client models on the edge devices and aggregation within the fog and cloud layers. The processes of initial clustering for edge devices and the model initialization in the cloud server are performed in parallel. Upon receiving the initial global model from the cloud server (`sendinitGlobalModel()`), the fog layers distribute the global model to all of the edge devices for which they are responsible (`sendGlobalModel()`). The objective here is to train the global model on local data available at the edge device. This training process occurs in a loop, iteratively refining the global model and the local models until both reach a certain level of convergence and performance.
 
 Once the distribution from the fog layer to the edge devices is complete, the edge devices begin local training (`beginLocalTraining()`), updating the model based on local data. After a round of training is completed, the private information is separated from the trained model (`separateBNStatistics()`) to create a personalized and non-personalized model. The private information is represented by separable parameters stored in BN Statistics. Both models are then concurrently sent to the fog layer (`sendBNStatistics()` and `sendNPModel()`) for further aggregation. The aggregation at the fog layers (`aggregateLocalModels()`) enhances the models' generalization across the data from various edge devices while maintaining privacy, and then updates the BN statistics (`updateBNStatistics()`). Then, based on the designed mechanism and the feedback from the cloud and the edge in the previous round, the joint optimization strategy of this round is adjusted (`updateJStrategy (via R Condition)`).
