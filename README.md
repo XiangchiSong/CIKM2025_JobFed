@@ -14,7 +14,7 @@ It is not available yet. The available code will be open source after the paper 
 
 ### Experimental Parameter Settings
 
-In addition to the parameters mentioned in the main text, the client batch size ($B$) is set to **20**. The total rounds ($T$) are set to **300** (standard) or a **threshold value (variable)** depending on different experiments. The client epoch ($E$) is set to **1**. The training device (`device`) is defaulted to **GPU**. The random seed is set to **0** by default.
+In addition to the parameters mentioned in the main text, the client batch size ($B$) is set to **20**. The total rounds ($T$) are set to **300** (standard) or a **threshold value (variable)** depending on different experiments. The client epoch ($E$) is set to **1**. The training device ($device$) is defaulted to **GPU**. The random seed is set to **0** by default.
 
 The client learning rate ($client\_lr$) and server learning rate ($server\_lr$) vary depending on the baselines and experimental environments.
 
