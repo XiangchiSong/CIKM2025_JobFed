@@ -30,15 +30,15 @@ For experiments where the results do not show significant differences, such as t
 
 ### Sequence Diagram of Architecture Workflow
 
-<div style="display: flex; align-items: flex-start; gap: 20px;">
+<div style="display: flex; flex-direction: row; gap: 30px; align-items: flex-start;">
 
-<!-- 左侧插图 -->
+<!-- 左侧图像 -->
 <div style="flex: 1;">
-  <img src="https://github.com/XiangchiSong/CIKM2025_JobFed/blob/main/Architecture%20Workflow.png" alt="Architecuture Workflow" style="max-width: 50%; height: auto; border: 1px solid #ccc;">
+  <img src="https://github.com/XiangchiSong/CIKM2025_JobFed/blob/main/Architecture%20Workflow.png" alt="Architecuture Workflow" style="width: 100%; max-width: 400px; border: 1px solid #ccc;">
 </div>
 
 <!-- 右侧正文 -->
-<div style="flex: 2;">
+<div style="flex: 2; font-size: 14px; line-height: 1.6;">
 
 The process begins with the edge devices initiating communication with the fog layer by sending identification information (`register()`). In response, the fog layer provides the edge devices with initial cluster configurations (`sendEdgeClusterConfig()`). This initial clustering is done randomly, and the edge devices are assigned to the cluster controlled by the fog nodes. Concurrently, the cloud initializes the global model (`initGlobalModel()`) and distributes the initial model to the fog layer, laying the foundation for subsequent local training of client models on the edge devices and aggregation within the fog and cloud layers. The processes of initial clustering for edge devices and the model initialization in the cloud server are performed in parallel. Upon receiving the initial global model from the cloud server (`sendinitGlobalModel()`), the fog layers distribute the global model to all of the edge devices for which they are responsible (`sendGlobalModel()`). The objective here is to train the global model on local data available at the edge device. This training process occurs in a loop, iteratively refining the global model and the local models until both reach a certain level of convergence and performance.
 
