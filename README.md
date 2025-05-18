@@ -1,16 +1,17 @@
 # [CIKM 2025] JobFed: Joint Optimization for Balancing Generalization and Personalization of Hierarchical Federated Learning in Large-scale IoT Environments
 This is the CIKM 2025 GitHub library. Due to the paper page limit, the flowcharts and analysis that cannot be fully explained in the paper are shown here, as well as all the data, parameter usage, and training records on the server.
 
-## System Code
-It is not available yet. The available code will be open source after the paper is published.
-
 ## Table of Contents
+* System Code
 * A brief proof of Section 4.4 - Theoretical Analysis of Optimization Stability.
 * Data Records: Data records in *.pkl* format for all experiments in this paper.
 * Figure: All original figures in the paper made by Python Matplotlib.
 * Experimental Parameter Settings.
 * Sequence Diagram of Architecture Workflow.
 
+
+### System Code
+It is not available yet. The available code will be open source after the paper is published.
 
 ### Experimental Parameter Settings
 
