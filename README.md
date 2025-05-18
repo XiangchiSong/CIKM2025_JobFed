@@ -33,8 +33,8 @@ For experiments where the results do not show significant differences, such as t
 <table>
 <tr>
   <!-- 左侧图像，固定宽度 -->
-  <td style="width: 500px; vertical-align: top;">
-    <img src="https://github.com/XiangchiSong/CIKM2025_JobFed/blob/main/Architecture%20Workflow.png" alt="Architecture Workflow" style="width: 200%; border: 1px solid #ccc;">
+  <td style="width: 700px; vertical-align: top;">
+    <img src="https://github.com/XiangchiSong/CIKM2025_JobFed/blob/main/Architecture%20Workflow.png" alt="Architecture Workflow" style="width: 100%; border: 1px solid #ccc;">
   </td>
 
   <!-- 右侧文字，占据剩余宽度 -->
