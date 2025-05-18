@@ -16,12 +16,12 @@ It is not available yet. The available code will be open source after the paper 
 
 In addition to the parameters mentioned in the main text, the client batch size ($B$) is set to **20**. The total rounds ($T$) are set to **300** (standard) or a **threshold value (variable)** depending on different experiments. The client epoch ($E$) is set to **1**. The training device ($device$) is defaulted to **GPU**. The random seed is set to **0** by default.
 
-The client learning rate ($$client\_lr$$) and server learning rate ($server\_lr$) vary depending on the baselines and experimental environments.
+The client learning rate (*client\_lr$*) and server learning rate (*server\_lr*) vary depending on the baselines and experimental environments.
 
 - In `pFedMe`, the server updates the global model with the designed parameter ($\beta$) set to **1.0**.
 - In `Per-FedAvg`, $\beta$ varies between **0.1 / 0.2** depending on the experiments.
-- For `SCAFFOLD` and `FedProx`, the weight decay ($weight\_decay$) is set to **1e-4**.
-- The proximal regularization parameter ($FedProx\_mu$) in `FedProx` is also set to **1e-4**.
+- For `SCAFFOLD` and `FedProx`, the weight decay (*weight\_decay*) is set to **1e-4**.
+- The proximal regularization parameter (*FedProx\_mu*) in `FedProx` is also set to **1e-4**.
 
 The $\alpha$ update learning rate ($\eta$) used in **our approach** is set to **0.1** by default. The predefined balancing ratio ($\gamma$) defaults to **0.5**, and the balancing ratio in the strategy ($optBeta$) is also set to **0.5** by default.
 
