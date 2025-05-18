@@ -34,7 +34,7 @@ For experiments where the results do not show significant differences, such as t
 
 <!-- 左侧插图 -->
 <div style="flex: 1;">
-  <img src="Architecuture Workflow.png" alt="Architecuture Workflow" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+  <img src="https://github.com/XiangchiSong/CIKM2025_JobFed/blob/main/Architecture%20Workflow.png" alt="Architecuture Workflow" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
 </div>
 
 <!-- 右侧正文 -->
