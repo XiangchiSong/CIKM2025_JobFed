@@ -1,12 +1,31 @@
 # [CIKM 2025] JobFed: Joint Optimization for Balancing Generalization and Personalization of Hierarchical Federated Learning in Large-scale IoT Environments
+This is the CIKM 2025 GitHub library. Due to the paper page limit, the flowcharts and analysis that cannot be fully explained in the paper are shown here, as well as all the data, parameter usage, and training records on the server.
 
 ## System Code
 It is not available yet. The available code will be open source after the paper is published.
 
 ## Table of Contents
-* Supplementary Material 1 - Appendix: Technical details and results analysis of the paper.
-* Supplementary Material 2 - Data Records: Data records in .pkl format for all experiments in this paper.
-* Supplementary Material 3 - Figure: Original figure of the paper.
+* A brief proof of Section 4.4 - Theoretical Analysis of Optimization Stability.
+* Data Records: Data records in *.pkl* format for all experiments in this paper.
+* Figure: All original figures in the paper made by Python Matplotlib.
+* Experimental Parameter Settings.
+* Sequence Diagram of Architecture Workflow.
+
+
+### Experimental Parameter Settings
+
+In addition to the parameters mentioned in the main text, the client batch size ($B$) is set to 20. The total rounds ($T$) are set to 300 (standard) or a threshold value (variable) depending on different experiments. The client epoch ($E$) is set to 1. The training device ($device$) is defaulted to GPU. The random seed is set to 0 by default. The client learning rate ($client\_lr$) and server learning rate ($server\_lr$) vary depending on the baselines and experimental environments. In \texttt{pFedMe}, the server updates the global model with the designed parameter ($\beta$) set to 1.0, and in \texttt{Per-FedAvg}, $\beta$ varies between 0.1/0.2 depending on the experiments. For \texttt{SCAFFOLD} and \texttt{FedProx}, the weight decay ($weight\_decay$) is set to 1e-4. The proximal regularization parameter ($FedProx\_mu$) in \texttt{FedProx} is set to 1e-4. The $\alpha$ update learning rate ($\eta$) used in our approach is set to 0.1 by default, with the predefined balancing ratio ($\gamma$) defaulting to 0.5, and the balancing ratio in the strategy ($optBeta$) set to 0.5 by default. For experiments where the results do not show significant differences as in the ablation study on $optBeta$, two decimal places are retained; for all other experiments, one decimal place is retained.
+
+
+### Sequence Diagram of Architecture Workflow
+
+The process begins with the edge devices initiating communication with the fog layer by sending identification information [\textit{register()}]. In response, the fog layer provides the edge devices with initial cluster configurations [\textit{sendEdgeClusterConfig()}]. This initial clustering is done randomly, and the \textit{edge} devices are assigned to the cluster controlled by the fog nodes. Concurrently, the cloud initializes the global model [\textit{initGlobalModel()}] and distributes the initial model to the fog layer, laying the foundation for subsequent local training of client models on the edge devices and aggregation within the fog and cloud layers. The processes of initial clustering for edge devices and the model initialization in the cloud server are performed in parallel. Upon receiving the initial global model from the cloud server [\textit{sendinitGlobalModel()}], the fog layers distribute the global model to all of the edge devices for which they are responsible [\textit{sendGlobalModel()}]. The objective here is to train the global model on local data available at the edge device. This training process occurs in a loop, iteratively refining the global model and the local models until both reach a certain level of convergence and performance.
+
+Once the distribution from the fog layer to the edge devices is complete, the edge devices begin local training [\textit{beginLocalTraining()}], updating the model based on local data. After a round of training is completed, the private information is separated from the trained model [\textit{separateBNStatistics()}] to create a personalized and non-personalized model. The private information is represented by separable parameters stored in BN Statistics. Both models are then concurrently sent to the fog layer [\textit{sendBNStatistics()} and \textit{sendNPModel()}] for further aggregation. The aggregation at the fog layers [\textit{aggregateLocalModels()}] enhances the models' generalization across the data from various edge devices while maintaining privacy, and then updates the BN statistics [\textit{updateBNStatistics()}]. Then, according to Definition~\ref{sec:def1} \& Definition~\ref{sec:def2}, based on the designed mechanism and the feedback from the cloud and the edge in the previous round, the joint optimization strategy of this round is adjusted [\textit{updateJStrategy (via R Condition)}]. 
+
+The updates to statistics and strategy are transmitted to the cloud server [\textit{sendJStrategy()} and \textit{sendBNStatistics()}], where the cloud server performs global aggregation of the updated information according to the strategy [\textit{beginAggregation()}]. This step integrates the insights of all fog layers to form a refined global generalization model that captures the collective knowledge of the entire system. After aggregation is completed, the cloud server will store the global model and update and overwrite it after each training. After the global update is completed, the global model is tested using the global data distribution [\textit{testGlobalModel()}], and the test feedback is sent back for the next round of strategy updates [\textit{sendGlobalFeedback()}].
+
+The cloud then sends the global aggregated model back to the fog layer [\textit{sendGlobalModel()}], which, after separation [\textit{separateGlobalModel()}], distributes the global model without personalized information to the edge devices represented by all clients [\textit{sendGlobalNPModel()}]. This model contains the public information of all clients in the system on their respective devices and has been globally adapted to make it more suitable for subsequent local personalized adjustments. After receiving this model, the client combines it with local private information and performs the personalization process [\textit{combinePersonalizedInfo()}]. During the personalization process, the BN layer adjusts the local model of each client to adapt the global model to local data distributions. After local adaptation is completed, they are tested using a local distribution dataset [\textit{testLocalModels()}], and the test feedback is sent back to the fog for the next round of strategy updates [\textit{sendLocalFeedback()}]. At the same time, the local personalized models will participate in subsequent training as updated local models.
 
 
 
