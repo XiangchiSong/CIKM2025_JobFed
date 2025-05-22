@@ -3,9 +3,9 @@ This is the CIKM 2025 GitHub library. Due to the paper page limit, the flowchart
 
 ## Table of Contents
 * System Code
-* Theoretical Analysis of Optimization Stability: A Brief Proof of Section 4.4 of the Paper.
+* Theoretical Analysis of Optimization Stability: A brief proof of Section 4.4 of this paper.
 * Data Records: Data records in *.pkl* format for all experiments in this paper.
-* Figure: All original figures in the paper made by Python Matplotlib.
+* Figure: All the original figures used in this paper.
 * Experimental Parameter Settings.
 * Sequence Diagram of Architecture Workflow.
 
