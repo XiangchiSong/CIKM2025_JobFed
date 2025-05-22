@@ -3,19 +3,25 @@ This is the CIKM 2025 GitHub library. Due to the paper page limit, the flowchart
 
 ## Table of Contents
 * System Code
-* A brief proof of Section 4.4 - Theoretical Analysis of Optimization Stability.
+* Theoretical Analysis of Optimization Stability: A Brief Proof of Section 4.4 of the Paper.
 * Data Records: Data records in *.pkl* format for all experiments in this paper.
 * Figure: All original figures in the paper made by Python Matplotlib.
 * Experimental Parameter Settings.
 * Sequence Diagram of Architecture Workflow.
 
-##
-
 ### System Code
 It is not available yet. The available code will be open source after the paper is published.
 
-### Experimental Parameter Settings
+### Theoretical Analysis of Optimization Stability
+Before the paper is formally accepted, please refer to the file *theoreticalAnalysisBriefProof.pdf* for a brief mathematical proof of the convergence and optimization stability.
 
+### Data Records
+Please refer to *Data Records.zip* to get all the server records and raw test results of the experiments conducted in the paper. The results are given in *.pkl* format according to the experiment type.
+
+### Figure
+Please refer to the *Figure* folder to obtain all the unprocessed experimental result figures used in this paper that are generated directly using Python Matplotlib tools.
+
+### Experimental Parameter Settings
 In addition to the parameters mentioned in the main text, the client batch size ($B$) is set to **20**. The total rounds ($T$) are set to **300** (standard) or a **threshold value (variable)** depending on different experiments. The client epoch ($E$) is set to **1**. The training device ($device$) is defaulted to **GPU**. The random seed is set to **0** by default.
 
 The client learning rate (*client\_lr*) and server learning rate (*server\_lr*) vary depending on the baselines and experimental environments.
@@ -28,7 +34,6 @@ The client learning rate (*client\_lr*) and server learning rate (*server\_lr*) 
 The $\alpha$ update learning rate ($\eta$) used in **our approach** is set to **0.1** by default. The predefined balancing ratio ($\gamma$) defaults to **0.5**, and the balancing ratio in the strategy ($optBeta$) is also set to **0.5** by default.
 
 For experiments where the results do not show significant differences, such as the **ablation study on $optBeta$, two decimal places** are retained; for all other experiments, **one decimal place** is retained.
-
 
 ### Sequence Diagram of Architecture Workflow
 
